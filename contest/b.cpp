@@ -1,33 +1,15 @@
-#include<iostream>
-
+#include<bits/stdc++.h>
 using namespace std;
-#define MAX 1000
-int a[MAX][MAX];
-void print_arr(int n,int m)
-{
-    cout << "Output" << endl;
-    int i,j;
-    for(i=0;i<n;i++){
-        for(j=0;j<m;++j){
-            cout << "a[" << i << "][" << j << "] : " << a[i][j] << endl;
-        }
-    }
-}
 int main()
 {
-    int n,m;
-    cin >> n >> m;
-
-
-    int i,j;
-    cout << "Enter the elements: ";
-    for(i=0;i<n;i++){
-        for(j=0;j<m;++j){
-            cin >> a[i][j];
+    int l,r;
+    scanf("%d %d",&l,&r);
+    int mod=0;
+    for(int i=l;i<=r;i++){
+        for(int j=i;j<=r;j++){
+            mod= max(mod, j%i);
+            printf("%d mod %d = %d\n",j,i,mod);
         }
     }
-
-    print_arr(n,m);
-
-    return 0;
+    cout<<mod<<endl;
 }

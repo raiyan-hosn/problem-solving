@@ -2,23 +2,23 @@
 using namespace std;
 #define MAX 1000
 int matrix[MAX][MAX];
-void spiralOrder(int crrnt_i,int crrnt_j,int m,int n){
-    if( crrnt_i>=(m+1)/2 || crrnt_j>=(n+1)/2){
+void spiralOrder(int pi,int pj,int m,int n){
+    if( pi>=(m+1)/2 || pj>=(n+1)/2){
         return;
     }
-    for(int j=crrnt_j;j<n-crrnt_j;j++){
-        printf("%d ",matrix[crrnt_i][j]);
+    for(int j=pj;j<n-pj;j++){
+        printf("%d ",matrix[pi][j]);
     }
-    for(int i=crrnt_i+1;i<m -crrnt_i;i++){
-        printf("%d ",matrix[i][n-crrnt_j -1]);
+    for(int i=pi+1;i<m -pi;i++){
+        printf("%d ",matrix[i][n-pj -1]);
     }
-    for(int j= n -crrnt_j -2;j>=crrnt_j;j--){
-        printf("%d ",matrix[m- crrnt_i-1][j]);
+    for(int j= n -pj -2;j>=pj;j--){
+        printf("%d ",matrix[m- pi-1][j]);
     }
-    for(int i= m-crrnt_i-2;i>crrnt_i;i--){
-        printf("%d ",matrix[i][crrnt_j]);
+    for(int i= m-pi-2;i>pi;i--){
+        printf("%d ",matrix[i][pj]);
     }
-    spiralOrder(crrnt_i+1,crrnt_j+1,m,n);
+    spiralOrder(pi+1,pj+1,m,n);
 }
 
 int main(void)

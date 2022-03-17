@@ -39,8 +39,23 @@ ll findMaxSubSetSum(vector<ll>&x,vector<ll>&y,ll s){
 }
 int main()
 {
-    vector<int>  v={1,2,3,4,5};
-    int n=(v.end()-(v.begin()+3));
-	printf("%d\n",n);
+	int n,s;
+    
+    // scanf("%d",&n);
+    n=6;s=10;
+    vector<ll>arr(n);
+    arr={3, 34, 4, 12, 5, 2};
+    vector<ll>x,y;
+    for(int i=0;i<n;i++){
+        // scanf("%lld",&arr[i]);
+    }
+    int half=(int)arr.size()/2;
+    vector<ll>lo(arr.begin(),arr.begin()+half);
+    makeAllCombinations(lo,x);
+    
+    vector<ll>hi(arr.begin()+half,arr.end());
+    makeAllCombinations(hi,y);
+    
+    printf("max sum= %lld\n",findMaxSubSetSum(x,y,s));
 
 }

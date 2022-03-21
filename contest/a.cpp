@@ -1,55 +1,46 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-/* For a given array arr[],
-returns the maximum j – i such that
-arr[j] > arr[i] */
-int maxIndexDiff(int arr[], int n)
-{
-	int maxDiff;
-	int i, j;
-
-	int* LMin = new int[(sizeof(int) * n)];
-	int* RMax = new int[(sizeof(int) * n)];
-
-	/* Construct LMin[] such that
-	LMin[i] stores the minimum value
-	from (arr[0], arr[1], ... arr[i]) */
-	LMin[0] = arr[0];
-	for (i = 1; i < n; ++i)
-		LMin[i] = min(arr[i], LMin[i - 1]);
-
-	/* Construct RMax[] such that
-	RMax[j] stores the maximum value from
-	(arr[j], arr[j+1], ..arr[n-1]) */
-	RMax[n - 1] = arr[n - 1];
-	for (j = n - 2; j >= 0; --j)
-		RMax[j] = max(arr[j], RMax[j + 1]);
-
-	/* Traverse both arrays from left to right
-	to find optimum j - i. This process is similar to
-	merge() of MergeSort */
-	i = 0, j = 0, maxDiff = -1;
-	while (j < n && i < n) {
-		if (arr[i] <= RMax[j]) {
-			maxDiff = max(maxDiff, j - i);
-			j = j + 1;
-		}
-		else
-			i = i + 1;
+#define eps 1e-8
+#define ll long long int
+#define MAX 100004
+bool isCubicNumber(ll n){
+	if(n==0)return false;
+	if(floor(pow(n,1./3)+eps)*floor(pow(n,1./3)+eps)*floor(pow(n,1./3)+eps)==n){
+		return true;
+	}else{
+		return false;
 	}
-
-	return maxDiff;
 }
+bool isSumOfcubic(vector<ll>&v,ll x){
+	for(int i=0;i<MAX;i++){
+		if(x<v[i])return false;
 
-// Driver Code
+		ll need= x-v[i];
+		// printf("need %lld\n",need);
+		if(isCubicNumber(need)){
+			return true;
+		}
+	}
+	return false;
+}
 int main()
 {
-	int arr[] = { 34,8,10,3,2,80,30,33,1 };
-	int n = sizeof(arr) / sizeof(arr[0]);
-	int maxDiff = maxIndexDiff(arr, n);
-	cout << maxDiff;
-	return 0;
+	vector<ll>v;
+	for(ll i=1;i<MAX;i++){
+		v.push_back(i*i*i);
+	}
+	int tc;
+	scanf("%d",&tc);
+	while(tc--){
+		ll x;
+		scanf("%lld",&x);
+		if(isSumOfcubic(v,x)){
+			printf("YES\n");
+		}
+		else{
+			printf("NO\n");
+		}
+	}
 }
 
-// This code is contributed by rathbhupendra
+

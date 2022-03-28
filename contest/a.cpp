@@ -2,44 +2,54 @@
 using namespace std;
 #define eps 1e-8
 #define ll long long int
-#define MAX 100004
-bool isCubicNumber(ll n){
-	if(n==0)return false;
-	if(floor(pow(n,1./3)+eps)*floor(pow(n,1./3)+eps)*floor(pow(n,1./3)+eps)==n){
-		return true;
-	}else{
-		return false;
-	}
+ll valueOfB(ll a){
+	return (a*a-1)>>1;
 }
-bool isSumOfcubic(vector<ll>&v,ll x){
-	for(int i=0;i<MAX;i++){
-		if(x<v[i])return false;
-
-		ll need= x-v[i];
-		// printf("need %lld\n",need);
-		if(isCubicNumber(need)){
-			return true;
-		}
-	}
-	return false;
+bool isValid(int a,int b,int n){
+	return (a*a-b)== sqrt(a*a + b*b)&& max(a,max(b,a*a-b))<=n&& 0<min(a,min(b,(a*a-b)));
 }
 int main()
 {
-	vector<ll>v;
-	for(ll i=1;i<MAX;i++){
-		v.push_back(i*i*i);
-	}
 	int tc;
 	scanf("%d",&tc);
 	while(tc--){
-		ll x;
-		scanf("%lld",&x);
-		if(isSumOfcubic(v,x)){
-			printf("YES\n");
+		ll n;
+		scanf("%lld",&n);
+		if(n<4){
+			printf("0\n");
+			continue;
 		}
-		else{
-			printf("NO\n");
+		ll lo=1,hi=n;
+		ll prev;
+		while(lo<hi){
+			ll mid=(lo+hi)/2;
+			ll b=valueOfB(mid);
+			if(b>n){
+				hi=mid-1;
+			}else{
+				prev=lo;
+				if(prev==mid){
+					lo=mid+1;
+				}else{
+					lo=mid;
+				}
+				
+			}
+	
 		}
+		// printf("prev = %d\n",prev);
+		while(valueOfB(prev+1)<n)prev++;
+		while(valueOfB(prev)>=n)prev--;
+		// printf("updated prev %d\n",prev);
+		ll res;
+		if(prev%2!=0){
+			res=(prev+1)/2;
+		}else{
+			res=prev/2;
+		}
+		res--;
+		printf("%lld\n",res);
+	
 	}
 }
 

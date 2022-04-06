@@ -12,7 +12,7 @@ int main()
     scanf("%d",&n);
     int arr[n];
     for(int i=0;i<n;i++)scanf("%d",&arr[i]);
-    set<vector<int>> st;
+
     int cnt=0;
     for(int a=0;a<n;a++){
         for(int b=0;b<n;b++){
@@ -20,15 +20,10 @@ int main()
                 for(int d=0;d<n;d++){
                     for(int e=0;e<n;e++){
                         if(arr[d]!=0){
-                            int res=(arr[a]*arr[b]+arr[c])/arr[d] -arr[e];
-                            if(_find(arr,n,res)&& st.count({arr[a],arr[b],arr[c],arr[d],arr[e],res})==0){
-                                printf("a=%d, b=%d, c=%d, d=%d, e=%d, f=%d ",arr[a],arr[b],arr[c],arr[d],arr[e],res);
-                                printf("lhs=%d , rhs=%d\n",(arr[a]*arr[b]+arr[c])/arr[d], arr[e]+res);
+                            int f=((arr[a]*arr[b]+arr[c]) /arr[d]) -arr[e];
+                            if(_find(arr,n,f)){
+                                
                                 cnt++;
-                                if(st.count({arr[a],arr[b],arr[c],arr[d],arr[e],res})!=0){
-                                    printf("found...............................\n");
-                                }
-                                st.insert({arr[a],arr[b],arr[c],arr[d],arr[e],res});
                             }
                         }
                     }

@@ -1,11 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-void prv(vector<int>v){
-    for(int i=0;i<v.size();i++){
-        printf("%d ",v[i]);
-    }
-    printf("\n");
-}
+
 int main()
 {
     int n;
@@ -13,41 +8,34 @@ int main()
     vector<int>v(n);
     for(int i=0;i<n;i++){
         scanf("%d",&v[i]);
+        // v[i]=rand()%1000;
     }
-    vector<int>lhs,rhs;//left hand side, righ hand side
+    vector<int>lhs;
     for(int a=0;a<n;a++){
         for(int b=0;b<n;b++){
             for(int c=0;c<n;c++){
-                for(int d=0;d<n;d++){
-                    if(v[d]!=0){
-                        lhs.push_back((v[a]*v[b]+v[c])/v[d]);
-                    }
-                }
+               
+                lhs.push_back((v[a]*v[b]+v[c]));    
             }
         }
     }
-    for(int e=0;e<n;e++){
-        for(int f=0;f<n;f++){
-            rhs.push_back(v[e]+v[f]);
+    map<int,pair<int,int>>mp;
+    for(int d=0;d<n;d++){
+        if(v[d]==0)continue;
+        for(int e=0;e<n;e++){
+            for(int f=0;f<n;f++){
+                int val=v[d]*(v[e]+v[f]);
+                mp[val]=make_pair(mp[val].first+1,v[d]);
+            }
         }
     }
-    sort(lhs.begin(),lhs.end());
-    sort(rhs.begin(),rhs.end());
 
-    // lhs.erase( unique(lhs.begin(),lhs.end()), lhs.end());
-    // rhs.erase( unique(rhs.begin(),rhs.end()), rhs.end());
     int cnt=0;
-    int i=0,j=0;
-    prv(lhs);prv(rhs);
-    while(i<lhs.size()&&j<rhs.size()){
-        if(lhs[i]==rhs[j]){
-            cnt++;
-            i++;j++;
-        }else if(lhs[i]<rhs[j]){
-            i++;
-        }else{
-            j++;
-        }
+    for(int i=0;i<lhs.size();i++){
+       int val=lhs[i];
+       if(mp.count(val)>0&& val%mp[val].second==0){
+           cnt+=mp[val].first;
+       }
     }
     printf("%d\n",cnt);
 }

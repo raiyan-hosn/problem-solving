@@ -81,7 +81,7 @@ int main(){
         graph[v].push_back(u);
     }
     for(int i=0;i<n;i++){
-        if(!vis[i]){      //if there exists any disconnected vertex, then find BCC of them.
+        if(!vis[i]){      //if there exists any disconnected vertex, then find BCC of them..
             generateBCC(i);
         }
     }

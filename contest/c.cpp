@@ -8,30 +8,8 @@ bool _find(int arr[],int n,int x){
 }
 int main()
 {
-    int n;
-    scanf("%d",&n);
-    int arr[n];
-    for(int i=0;i<n;i++)scanf("%d",&arr[i]);
+    map<int,int>m;
+    if(m[0]==1);
 
-    int cnt=0;
-    for(int a=0;a<n;a++){
-        for(int b=0;b<n;b++){
-            for(int c=0;c<n;c++){
-                for(int d=0;d<n;d++){
-                    for(int e=0;e<n;e++){
-                        if(arr[d]!=0){
-                            int f=((arr[a]*arr[b]+arr[c]) /arr[d]) -arr[e];
-                            if(_find(arr,n,f)){
-                                
-                                cnt++;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    printf("cnt= %d\n",cnt);
-    main();
-
+    printf("%d\n",m[0]);
 }

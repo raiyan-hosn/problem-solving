@@ -13,37 +13,38 @@ after that, we will find the second valid sub-array and so on.......
 
 #include<bits/stdc++.h>
 using namespace std;
-#define ll long long int
+
 int main()
 {
     int tc;
     scanf("%d",&tc);
     while(tc--){
-        ll n,x;
-        scanf("%lld %lld",&n,&x);
-        vector<ll>v(n);
+        int n,x;
+        scanf("%d %d",&n,&x);
+        vector<int>v(n);
         for(int i=0;i<n;i++){
-            scanf("%lld",&v[i]);
+            scanf("%d",&v[i]);
         }
-        ll sum=v[0];
-        ll cnt=0;
-        ll crrn=0;
-        int i=0,j=0;
-        for(;i<n&&j<n;){
-            if(sum>=x){
-            sum-=v[i++]; 
-              
+        int sum=0;
+        int cnt=0;
+        int crrn=0;
+        for(int i=0;i<n;i++){
+            if(sum+v[i]<x){
+                sum+=v[i];
+                crrn++;
             }else{
-                 j++;
-                if(j>=i){
-                    cnt+=(j-i);
-                }
-                if(j<n){
-                    sum+=v[j];
+                cnt+=((crrn*(crrn+1))/2);
+                if(v[i]<x){
+                    sum=v[i];
+                    crrn=1;
+                }else{
+                    crrn=sum=0;
                 }
             }
         }
-        
-        printf("%lld\n",cnt);
+        if(crrn!=0){
+            cnt+=((crrn*(crrn+1))/2);
+        }
+        printf("%d\n",cnt);
     }
 }

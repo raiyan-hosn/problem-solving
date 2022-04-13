@@ -1,24 +1,35 @@
+/**
+ if we always want to Fi >= Fi+1, 
+ then we always need Ai<= Ai+1
+ because every Fi is made of An - Ai
+
+ So we have check if A[] is sorted in ascending order.
+ we can check this in linear time.
+ Time complexity = O(N)
+ spcace complexity=O(1) 
+ **/
+
+
 #include<bits/stdc++.h>
 using namespace std;
-#define ll long long int
-int valueOfB(int a){
-	return (a*a-1)>>1;
-}
-bool isValid(int a,int b,int n){
-	return (a*a-b)== sqrt(a*a + b*b)&& max(a,max(b,a*a-b))<=n&& 0<min(a,min(b,(a*a-b)));
+
+bool isDescendingFriendArray(vector<int>&v){
+    for(int i=0;i<v.size()-1;i++){
+        if(v[i]>v[i+1])return false;
+    }
+    return true;
 }
 int main()
 {
-    int n=5734;
-
-    for(int a=1;a<=n;a++){
-        int b=valueOfB(a);
-        printf("a= %d, b= %d  ",a,b);
-        if(isValid(a,b,n)){
-            printf("valid\n");
-        }else{
-            printf("not valid....\n");
-        }
+    int n;
+    scanf("%d",&n);
+    vector<int>v(n);
+    for(int i=0;i<n;i++){
+        scanf("%d",&v[i]);
     }
-
+    if(isDescendingFriendArray(v)){
+        printf("Yes\n");
+    }else{
+        printf("No\n");
+    }
 }

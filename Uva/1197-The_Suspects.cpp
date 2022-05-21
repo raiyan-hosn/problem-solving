@@ -27,6 +27,7 @@ int main(){
     while(scanf("%d %d",&n,&m)&&(n||m)){
         for(int i=0;i<n;i++){
             par[i]=i;
+            sz[i]=1;
         }
         while(m--){
             int members, firstMember;
